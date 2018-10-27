@@ -281,6 +281,25 @@ module.exports = {
               getLocalIdent: getCSSModuleLocalIdent,
             }),
           },
+          {
+            test: /\.less$/,
+            use: [
+              {
+                loader: "style-loader"
+              },
+              {
+                loader: "css-loader",
+                options: {
+                  sourceMap: true,
+                  modules: true,
+                  localIdentName: "[local]___[hash:base64:5]"
+                }
+              },
+              {
+                loader: "less-loader"
+              }
+            ]
+          },
           // Opt-in support for SASS (using .scss or .sass extensions).
           // Chains the sass-loader with the css-loader and the style-loader
           // to immediately apply all styles to the DOM.
