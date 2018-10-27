@@ -13,6 +13,7 @@ const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -282,22 +283,11 @@ module.exports = {
             }),
           },
           {
-            test: /\.less$/,
+            test: /\.(less)$/,
             use: [
-              {
-                loader: "style-loader"
-              },
-              {
-                loader: "css-loader",
-                options: {
-                  sourceMap: true,
-                  modules: true,
-                  localIdentName: "[local]___[hash:base64:5]"
-                }
-              },
-              {
-                loader: "less-loader"
-              }
+                MiniCssExtractPlugin.loader,
+                "css-loader",
+                "less-loader"
             ]
           },
           // Opt-in support for SASS (using .scss or .sass extensions).
@@ -346,6 +336,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,

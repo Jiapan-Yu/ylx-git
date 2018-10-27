@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import style from './index.less';
+import './index.less';
 
 class App extends React.Component {
   render() {
-    return (<div className={style.header}>My Header Text</div>);
+    return (<div className="header">My Header Text</div>);
   }
 }
 
